@@ -1,0 +1,23 @@
+name: Package
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  package_rpm:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Package RPM and SRPM
+          uses: xmidt-org/rpm-package-action@v1
+          with:
+            path: .
+            spec: node_exporter.spec
+            distro: rocky-8
+
+        - shell: bash
+          run: |
+            ls -l
+            ls -l output
